@@ -152,7 +152,7 @@ Platform serves two distinct audiences simultaneously:
 | 7 | Detection Tuning | KQL noise reduction, signal optimization |
 | 8 | Endpoint Layer | Sysmon + Winlogbeat, three-layer detection |
 | 9 | EDR Visibility | LOLBin detection, attacker tradecraft simulation |
-
+| 10 | Detection Engineering | 7 rules, ATT&CK mapped, rule health monitoring |
 ---
 
 ## Attacker Tradecraft Simulated and Detected
@@ -173,13 +173,6 @@ correctly surfaces the technique in Kibana dashboards.
 
 ## Coming Next
 
-### Day 10 — Elastic Detection Rules
-- Formal alert rules with severity classification
-- Encoded PowerShell rule
-- LOLBin abuse detection rule
-- Brute force threshold alert
-- Persistence mechanism alert
-- MITRE ATT&CK tagging on all rules
 
 ### Day 11 — Claude AI Triage Engine
 - Python script polling Elasticsearch for alerts
