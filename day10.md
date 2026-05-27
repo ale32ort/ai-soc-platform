@@ -96,23 +96,23 @@ maintain detection infrastructure — ensuring rules are
 firing correctly, performing efficiently, and not generating
 excessive false positives.
 
-### Threat Hunting Dashboard
-Expanded hunting platform tracking:
-- Beaconing detection patterns
-- Uncommon TCP service activity
-- Suricata alert visibility and severity
-- Destination port analysis
-- Host activity behavioral analysis
-- Network anomaly detection
+### Attack Chain Correlation Dashboard
 
-### Network IDS Monitoring Dashboard
-Extended Suricata telemetry visibility:
-- External connection tracking
-- Potential beaconing activity
-- Protocol distribution monitoring
-- Active host enumeration
-- Network traffic volume analysis
-- Threat severity classification
+Expanded attack correlation platform tracking:
+
+- Multi-stage attack timeline visualization
+- Correlated detection rule activity
+- Most targeted host visibility
+- Users generating security alerts
+- Alert type distribution analysis
+- Live security alert feed monitoring
+- Persistence and privilege escalation correlation
+- Attack progression visibility across the SOC environment
+
+This dashboard mirrors how enterprise SOC teams correlate
+multi-stage attacker behavior — enabling analysts to track
+attack progression, identify suspicious activity patterns,
+and improve threat hunting and incident triage workflows.
 
 ---
 
