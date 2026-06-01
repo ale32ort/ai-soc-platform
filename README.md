@@ -111,15 +111,7 @@ Platform serves two distinct audiences simultaneously:
 - Alert feeds and threat signature tracking
 - Endpoint process and authentication tables
 - Pivot-ready investigation surfaces
-
-**Attack Chain Correlation** — Multi-stage attacker behavior visibility
-- Attack timeline correlation
-- Top triggered detection rules
-- Most targeted hosts
-- Users generating security alerts
-- Alert type distribution
-- Live alert feed monitoring
-
+  
 ---
 
 ## Dashboard Architecture
@@ -167,6 +159,20 @@ Expanded attack correlation platform tracking:
 - Most targeted hosts and users
 - Alert distribution analysis
 - Live SOC alert monitoring and triage
+
+---
+
+## Dashboard Inventory
+
+1. SOC Dashboard
+2. Threat Hunting Dashboard
+3. Endpoint Threat Hunting Dashboard
+4. SOC Detection & Rule Monitoring Dashboard
+5. Attack Chain Correlation Dashboard
+
+---
+
+
   
 ## Threat Hunting Coverage
 
@@ -190,6 +196,18 @@ Expanded attack correlation platform tracking:
 | Persistence | T1136.001 | New account creation (Event 4720) |
 | Credential Access | T1003 | LSASS access (Sysmon EID 10) |
 | Defense Evasion | T1055 | Process injection detection |
+
+---
+
+## Custom Detection Rules
+
+- Suspicious Encoded PowerShell
+- Suspicious Scheduled Task Creation
+- Registry Run Key Persistence
+- Malicious Service Creation Detection
+- Excessive Failed Logons
+- New Local User Created
+- User Added to Administrator Group
 
 ---
 
