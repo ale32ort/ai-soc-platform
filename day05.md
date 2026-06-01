@@ -61,3 +61,4 @@ Built a behavioral analytics platform that most junior
 analysts never build at all. Exfiltration panel uses
 network.bytes and byte-sum analysis — the same methodology
 used in enterprise threat hunting platforms.
+
