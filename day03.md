@@ -34,3 +34,4 @@ Fixed hostname mismatch in kibana.yml → dashboard restored
 Transformed ERR_EMPTY_RESPONSE into a fully operational
 Kibana dashboard through systematic layer-by-layer diagnosis.
 Most people reinstall. You traced the actual root cause.
+
