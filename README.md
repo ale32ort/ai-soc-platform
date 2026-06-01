@@ -164,16 +164,26 @@ Expanded attack correlation platform tracking:
 
 ## Dashboard Inventory
 
-1. SOC Dashboard
-2. Threat Hunting Dashboard
-3. Endpoint Threat Hunting Dashboard
-4. SOC Detection & Rule Monitoring Dashboard
-5. Attack Chain Correlation Dashboard
+1. SOC Dashboard — Executive monitoring and network visibility
+2. Threat Hunting Dashboard — Behavioral analytics and anomaly hunting
+3. Endpoint Threat Hunting Dashboard — Endpoint telemetry and persistence monitoring
+4. SOC Detection & Rule Monitoring Dashboard — Detection engineering and rule health
+5. Attack Chain Correlation Dashboard — Multi-stage attack visibility and alert correlation
 
 ---
 
+## Custom Detection Rules
 
-  
+- Suspicious Encoded PowerShell
+- Suspicious Scheduled Task Creation
+- Registry Run Key Persistence
+- Malicious Service Creation Detection
+- Excessive Failed Logons
+- New Local User Created
+- User Added to Administrator Group
+
+--
+
 ## Threat Hunting Coverage
 
 ### Network — Organized by MITRE ATT&CK Tactic
@@ -196,18 +206,6 @@ Expanded attack correlation platform tracking:
 | Persistence | T1136.001 | New account creation (Event 4720) |
 | Credential Access | T1003 | LSASS access (Sysmon EID 10) |
 | Defense Evasion | T1055 | Process injection detection |
-
----
-
-## Custom Detection Rules
-
-- Suspicious Encoded PowerShell
-- Suspicious Scheduled Task Creation
-- Registry Run Key Persistence
-- Malicious Service Creation Detection
-- Excessive Failed Logons
-- New Local User Created
-- User Added to Administrator Group
 
 ---
 
@@ -270,7 +268,6 @@ autonomous investigation agent:
 - Automatic SIEM pivot and host history correlation
 - Cross-host event correlation
 - Confidence-scored investigation reports
-
 
 ---
 
