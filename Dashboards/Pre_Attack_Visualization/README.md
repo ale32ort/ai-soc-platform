@@ -25,4 +25,4 @@ Security alerts present before attack simulation.
 
 ## Rule Monitoring Dashboard
 
-![Rule Monitoring](SOC_Detection_&_Rule_Monitoring .png)
+![Rule Monitoring](SOC_Detection_&_Rule_Monitoring.png)
