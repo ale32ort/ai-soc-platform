@@ -35,3 +35,4 @@ Diagnosed why dashboards showed no data despite Elastic
 working correctly. Fixed interface routing. Validated
 complete pipeline end to end. Lab transitioned from
 infrastructure setup into live defensive monitoring.
+
