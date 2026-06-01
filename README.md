@@ -201,12 +201,12 @@ Expanded attack correlation platform tracking:
 | 2 | Sensors | Wireless monitoring, professional dashboards |
 | 3 | Troubleshooting | SSL/TLS resolution, Kibana restored |
 | 4 | Validation | Interface routing fixed, pipeline confirmed |
-| 5 | Threat Hunting | Behavioral analytics platform built |
-| 6 | Executive Layer | Dual-audience dashboard architecture |
+| 5 | Threat Hunting | Threat Hunting Dashboard and behavioral analytics platform built |
+| 6 | Executive Layer | SOC Dashboard and Dual-audience dashboard architecture |
 | 7 | Detection Tuning | KQL noise reduction, signal optimization |
-| 8 | Endpoint Layer | Sysmon + Winlogbeat, three-layer detection |
+| 8 | Endpoint Layer | Endpoint Threat Hunting Dashboard and Sysmon + Winlogbeat integration, three-layer detection |
 | 9 | EDR Visibility | LOLBin detection, attacker tradecraft simulation |
-| 10 | Detection Engineering | 7 rules, ATT&CK mapped, rule health monitoring, Attack Chain Correlation Dashboard |
+| 10 | Detection Engineering | 7 custom ATT&CK mapped rules, Rule Monitoring Dashboard, Attack Chain Correlation Dashboard |
 | 11 | Attack Simulation & Validation | Multi-stage attack simulation, detection validation, attack-chain correlation testing, post-attack dashboard analysis |
 ---
 
