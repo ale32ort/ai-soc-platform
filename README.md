@@ -112,6 +112,14 @@ Platform serves two distinct audiences simultaneously:
 - Endpoint process and authentication tables
 - Pivot-ready investigation surfaces
 
+- **Attack Chain Correlation** — Multi-stage attacker behavior visibility
+- Attack timeline correlation
+- Top triggered detection rules
+- Most targeted hosts
+- Users generating security alerts
+- Alert type distribution
+- Live alert feed monitoring
+
 ---
 
 ## Threat Hunting Coverage
@@ -152,7 +160,8 @@ Platform serves two distinct audiences simultaneously:
 | 7 | Detection Tuning | KQL noise reduction, signal optimization |
 | 8 | Endpoint Layer | Sysmon + Winlogbeat, three-layer detection |
 | 9 | EDR Visibility | LOLBin detection, attacker tradecraft simulation |
-| 10 | Detection Engineering | 7 rules, ATT&CK mapped, rule health monitoring |
+| 10 | Detection Engineering | 7 rules, ATT&CK mapped, rule health monitoring, Attack Chain Correlation Dashboard |
+| 11 | Attack Simulation & Validation | Multi-stage attack simulation, detection validation, attack-chain correlation testing, post-attack dashboard analysis |
 ---
 
 ## Attacker Tradecraft Simulated and Detected
@@ -174,14 +183,14 @@ correctly surfaces the technique in Kibana dashboards.
 ## Coming Next
 
 
-### Day 11 — Claude AI Triage Engine
+### Day 12 — Claude AI Triage Engine
 - Python script polling Elasticsearch for alerts
 - Suricata network alerts + Sysmon endpoint alerts
 - Claude API analyzes each alert with full context
 - Returns: verdict, ATT&CK mapping, response recommendation
 - Flask dashboard displays AI triage in real time
 
-### Day 12 — Portfolio Launch
+### Day 13 — Portfolio Launch
 - Demo video: full attack-to-triage kill chain recording
 - GitHub polish and final documentation
 
