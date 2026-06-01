@@ -21,3 +21,4 @@
 - Elasticsearch + Kibana
 - Filebeat
 - Kali Linux VM
+
