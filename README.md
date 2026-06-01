@@ -112,7 +112,7 @@ Platform serves two distinct audiences simultaneously:
 - Endpoint process and authentication tables
 - Pivot-ready investigation surfaces
 
-- **Attack Chain Correlation** — Multi-stage attacker behavior visibility
+**Attack Chain Correlation** — Multi-stage attacker behavior visibility
 - Attack timeline correlation
 - Top triggered detection rules
 - Most targeted hosts
@@ -122,6 +122,52 @@ Platform serves two distinct audiences simultaneously:
 
 ---
 
+## Dashboard Architecture
+
+### SOC Dashboard
+Executive-level security visibility providing:
+- Total alerts and event volume
+- Active hosts and targeted assets
+- External connection monitoring
+- Protocol distribution analysis
+- Network activity overview
+
+### Threat Hunting Dashboard
+Expanded hunting platform tracking:
+- Beaconing detection patterns
+- Uncommon TCP service activity
+- Suricata alert visibility and severity
+- Destination port analysis
+- Host activity behavioral analysis
+- Network anomaly detection
+
+### Endpoint Threat Hunting Dashboard
+Expanded endpoint visibility tracking:
+- Process creation activity
+- Authentication events
+- Failed logon monitoring
+- Persistence-related activity
+- Endpoint behavioral telemetry
+- Windows security event analysis
+
+### SOC Detection & Rule Monitoring Dashboard
+Expanded detection engineering platform tracking:
+- Rule execution health
+- Detection reliability
+- Alert generation performance
+- Rule scheduling delays
+- Detection tuning effectiveness
+- False positive reduction efforts
+
+### Attack Chain Correlation Dashboard
+Expanded attack correlation platform tracking:
+- Multi-stage attacker behavior visibility
+- Correlated detection timeline activity
+- Persistence and privilege escalation events
+- Most targeted hosts and users
+- Alert distribution analysis
+- Live SOC alert monitoring and triage
+  
 ## Threat Hunting Coverage
 
 ### Network — Organized by MITRE ATT&CK Tactic
