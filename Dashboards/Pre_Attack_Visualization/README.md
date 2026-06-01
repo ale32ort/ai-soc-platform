@@ -5,7 +5,7 @@ Security alerts present before attack simulation.
 ![Baseline ALerts](Baseline_Alerts.png)
 ## SOC Dashboard
 
-![SOC Dashboard](SOC_Dashboard.png)
+![SOC Dashboard](Network_IDS_Dashboard.png)
 
 ## Threat Hunting Dashboard
 
