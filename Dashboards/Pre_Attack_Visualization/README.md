@@ -1,5 +1,13 @@
 # Pre Attack Visualization
 Baseline SOC dashboards and detection rules before attack simulation.
+Prior to attack simulation:
+
+- 7 custom detection rules enabled
+- 10,606 successful rule executions
+- 15 existing alerts from rule validation testing
+- Network IDS active (Suricata)
+- Endpoint monitoring active (Winlogbeat + Sysmon)
+- Threat hunting dashboards operational
 ## Baseline Alert State
 Security alerts present before attack simulation.
 ![Baseline ALerts](Baseline_Alerts.png)
