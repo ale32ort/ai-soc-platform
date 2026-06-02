@@ -1,24 +1,44 @@
 # Reconnaissance Phase
 
-Screenshots and evidence collected during the reconnaissance stage of the attack simulation.
-
-
 ## Objective
-Identify exposed services and generate reconnaissance telemetry.
+
+Perform reconnaissance against the target system and capture baseline telemetry within the Elastic SIEM environment.
 
 ## Evidence Collected
 
-### SOC Dashboard
-Shows increase in network alerts and traffic.
+### 1. SOC Dashboard After Reconnaissance
 
-### Attack Chain Correlation
-Maps reconnaissance activity to detections.
+![SOC Dashboard](01_SOC_Dashboard_After_Recon.png)
 
-### Threat Hunting Dashboard
-Displays anomalous network behavior and beaconing indicators.
+Observed increased network activity, alert generation, and external connection visibility following reconnaissance actions.
 
-### Nmap Port Scan
+---
+
+### 2. Attack Chain Correlation Dashboard
+
+![Attack Chain Correlation](02_Attack_Chain_Correlation.png)
+
+Correlated security detections and attack telemetry generated during reconnaissance activity.
+
+---
+
+### 3. Threat Hunting Dashboard
+
+![Threat Hunting Dashboard](03_Threat_Hunting_Dashboard.png)
+
+Displayed beaconing indicators, unusual TCP service activity, and Suricata detections generated during scanning.
+
+---
+
+### 4. Nmap Port Scan Results
+
+![Nmap Scan](04_Nmap_Port_Scan.png)
+
 Open ports discovered:
-- 135
-- 139
-- 445
+
+* TCP 135 (MSRPC)
+* TCP 139 (NetBIOS-SSN)
+* TCP 445 (SMB)
+
+These findings established the attack surface used during subsequent phases of the attack simulation.
+
