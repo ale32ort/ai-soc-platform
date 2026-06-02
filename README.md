@@ -1,15 +1,94 @@
 # AI-Assisted SOC Platform
 
-A production-grade security operations platform built on
-Raspberry Pi 5 from scratch. Designed to demonstrate
-real-world SOC capabilities including multi-sensor network
-monitoring, endpoint detection engineering, behavioral
-threat hunting, and AI-assisted alert triage with automated
-MITRE ATT&CK mapping.
+A production-grade multi-sensor Security Operations Center (SOC) platform built from scratch on a Raspberry Pi 5. The environment combines wireless monitoring, network intrusion detection, endpoint telemetry, attack simulation, detection engineering, and AI-assisted security operations into a unified Elastic SIEM platform.
+
+The platform provides correlated visibility across three independent detection layers:
+
+- Wireless Monitoring (Alfa AWUS036ACS)
+- Network IDS Monitoring (Suricata + Zeek via SPAN Port Mirroring)
+- Endpoint Detection & Response (Sysmon + Winlogbeat)
+
+The environment was validated through a multi-stage attack simulation covering Reconnaissance, Execution, Persistence, and Privilege Escalation techniques mapped to MITRE ATT&CK.
+
+---
+
+## Quick Navigation
+
+- Multi-Sensor Architecture
+- Detection Engineering
+- Threat Hunting Dashboards
+- Attack Simulation & Validation
+- MITRE ATT&CK Coverage
+- AI Triage Roadmap
+
+---
+  
+
+## Current Project Metrics
+
+- 3 Independent Detection Layers
+- Wireless + Network + Endpoint Visibility
+- Managed Switch SPAN Monitoring
+- 5 Security Dashboards
+- 7 Custom Detection Rules
+- Multi-Stage Attack Simulation Completed
+- MITRE ATT&CK Mapped Detections
+- End-to-End Attack Chain Correlation
+- Detection Validation Completed
+- AI-Assisted SOC Roadmap
+
+This platform was designed to emulate a modern SOC by combining wireless visibility, network intrusion detection, endpoint telemetry, custom detection engineering, attack simulation, and AI-assisted security operations into a unified security monitoring environment.
+  
+---
+
+## Multi-Sensor Security Architecture
+
+The platform combines three independent security monitoring layers into a single Elastic SIEM environment.
+
+```text
+Wireless Sensor (Alfa Adapter)
+            │
+            ▼
+Network IDS (Suricata + Zeek)
+            │
+            ▼
+Endpoint Telemetry (Sysmon + Winlogbeat)
+            │
+            ▼
+Elasticsearch + Kibana
+            │
+            ▼
+Detection Engineering
+Threat Hunting
+Attack Correlation
+AI-Assisted Triage
+```
 
 ---
 
 ## Platform Stack
+
+### Detection Layers
+
+#### Wireless Layer
+- 802.11 monitoring
+- Device discovery
+- Wireless visibility
+
+#### Network Layer
+- SPAN-port traffic monitoring
+- Suricata IDS
+- Zeek protocol analysis
+- Behavioral network detection
+
+#### Endpoint Layer
+- Sysmon telemetry
+- Windows Security Events
+- Process monitoring
+- Persistence detection
+- Privilege escalation monitoring
+
+This architecture enables attack visibility across wireless, network, and endpoint activity while supporting full attack-chain correlation.
 
 ### Core Infrastructure
 - Raspberry Pi 5 8GB — SOC server
@@ -57,21 +136,19 @@ MITRE ATT&CK mapping.
 - Persistence mechanism detection
 
 
-
-Wireless (Alfa) ─────────────────────┐
-▼
-Network Traffic → Switch (mirror) → Suricata → eve.json → Filebeat ─┐
-▼
-Windows Endpoint → Sysmon + Winlogbeat ──────────────────────────────┤
-▼
-Elasticsearch
-│
-▼
-Kibana
-│
-┌───────────────────────┤
-▼                       ▼
-Executive Dashboard    Analyst Dashboard
+```text
+Wireless Sensor (Alfa) ──────────────┐
+                                     │
+Network IDS (Suricata + Zeek) ───────┼──► Elasticsearch + Kibana
+                                     │
+Endpoint Telemetry (Sysmon) ─────────┘
+                                              │
+                                              ▼
+                              Detection Engineering
+                              Threat Hunting
+                              Attack Correlation
+                              AI-Assisted Triage
+```
 
 ---
 
@@ -182,7 +259,42 @@ Expanded attack correlation platform tracking:
 - New Local User Created
 - User Added to Administrator Group
 
---
+---
+
+## Attack Simulation & Detection Validation
+
+The platform was validated through a multi-stage attack simulation designed to emulate realistic attacker behavior across multiple MITRE ATT&CK tactics.
+
+### Simulated Attack Chain
+
+| Attack Phase | Technique | ATT&CK Technique | Detection Status |
+|-------------|------------|------------------|------------------|
+| Reconnaissance | Nmap Service Discovery | T1046 | Detected |
+| Execution | Scheduled Task Creation | T1053.005 | Detected |
+| Execution | Service Creation | T1543.003 | Detected |
+| Persistence | Registry Run Key | T1547.001 | Detected |
+| Privilege Escalation | New Local User Creation | T1136.001 | Detected |
+| Privilege Escalation | User Added to Administrators | T1098 | Detected |
+
+### Detection Validation Results
+
+Successfully validated:
+
+**A total of 41 alerts were generated during testing, including high-severity persistence and privilege escalation detections.**
+
+- Suspicious Scheduled Task Creation
+- Malicious Service Creation Detection
+- Registry Run Key Persistence
+- New Local User Created
+- User Added to Administrator Group
+
+Evidence, screenshots, dashboard correlation, and post-incident analysis are documented under:
+
+Dashboards/Post_Attack_Visualization/
+
+This testing confirmed end-to-end visibility from attacker activity to alert generation, dashboard correlation, investigation, and detection validation.
+
+---
 
 ## Threat Hunting Coverage
 
@@ -223,39 +335,71 @@ Expanded attack correlation platform tracking:
 | 8 | Endpoint Layer | Endpoint Threat Hunting Dashboard and Sysmon + Winlogbeat integration, three-layer detection |
 | 9 | EDR Visibility | LOLBin detection, attacker tradecraft simulation |
 | 10 | Detection Engineering | 7 custom ATT&CK mapped rules, Rule Monitoring Dashboard, Attack Chain Correlation Dashboard |
-| 11 | Attack Simulation & Validation | Multi-stage attack simulation, detection validation, attack-chain correlation testing, post-attack dashboard analysis |
+| 11 | Operational Validation | Multi-stage attack simulation, detection validation, MITRE ATT&CK coverage verification, attack-chain correlation, post-incident analysis |
+
 ---
 
 ## Attacker Tradecraft Simulated and Detected
 
-- Nmap reconnaissance scans
-- SSH brute force attempts
-- Encoded PowerShell execution
-- Scheduled task persistence creation
-- LOLBin invocation patterns
-- Suspicious process chain execution
-- Network beaconing patterns
-- Living-Off-The-Land binary abuse
+### Reconnaissance
+- Nmap host discovery
+- Port scanning
+- Service enumeration
 
-Each simulation validated that the detection platform
-correctly surfaces the technique in Kibana dashboards.
+### Execution
+- Scheduled task creation
+- Windows service creation
+- Encoded PowerShell execution
+
+### Persistence
+- Registry Run Key persistence
+- Scheduled task persistence
+
+### Privilege Escalation
+- New local user creation
+- User added to Administrators group
+
+### Endpoint Activity
+- LOLBin invocation
+- Process creation tracking
+- Authentication monitoring
+
+### Network Activity
+- Beaconing detection
+- SSH authentication analysis
+- Protocol anomaly detection
+
+Each technique was validated through custom detection rules, Elastic Security alerts, dashboard correlation, and MITRE ATT&CK mapping.
 
 ---
 
 ## Coming Next
 
+### Day 12 — AI Alert Triage Engine
 
-### Day 12 — Claude AI Triage Engine
 - Python script polling Elasticsearch for alerts
 - Suricata network alerts + Sysmon endpoint alerts
-- Claude API analyzes each alert with full context
-- Returns: verdict, ATT&CK mapping, response recommendation
-- Flask dashboard displays AI triage in real time
+- AI-generated alert summaries
+- Automated ATT&CK mapping
+- Analyst response recommendations
+- Investigation guidance
 
-### Day 13 — Portfolio Launch
-- Demo video: full attack-to-triage kill chain recording
-- GitHub polish and final documentation
+### Day 13 — Portfolio Launch & Architecture Documentation
 
+- Full architecture diagram
+- Demo video
+- GitHub polish
+- LinkedIn publication
+- Recruiter-ready documentation
+
+### Day 14 — Advanced EDR Threat Hunting Platform
+
+- Process tree analysis
+- Parent-child process correlation
+- PowerShell investigation dashboard
+- Endpoint timeline analysis
+- Advanced EDR visibility
+  
 ---
 
 ## Future Roadmap — Agentic AI Evolution
