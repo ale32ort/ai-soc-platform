@@ -1,7 +1,7 @@
 # Day 11 - Attack Simulation & Detection Validation
  
 ## Overview
-
+ 
 Day 11 focused on validating the SOC environment through a multi-stage attack simulation. Rather than building new infrastructure, the objective was to test existing detections, validate alert generation, and confirm visibility across multiple stages of the attack lifecycle.
 
 The simulation covered Reconnaissance, Execution, Persistence, and Privilege Escalation techniques while generating alerts that were analyzed through Elastic SIEM dashboards and custom detection content.
