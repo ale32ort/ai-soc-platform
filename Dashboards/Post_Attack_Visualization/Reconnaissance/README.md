@@ -2,6 +2,7 @@
 
 Screenshots and evidence collected during the reconnaissance stage of the attack simulation.
 
+
 ## Objective
 Identify exposed services and generate reconnaissance telemetry.
 
