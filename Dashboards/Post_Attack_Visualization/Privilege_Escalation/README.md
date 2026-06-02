@@ -65,15 +65,18 @@ Updated alert dashboard showing detection activity following privilege escalatio
 
 ## Detection Validation
 
-The following detection rule was successfully validated:
+The following detection rules were successfully validated:
 
+* New Local User Created
 * User Added to Administrator Group
 
-The generated alert confirmed that Windows security events were successfully collected, ingested by Elastic Security, processed by the detection engine, and surfaced within the SOC monitoring environment.
+The generated alerts confirmed that Windows account creation and administrative group membership modifications were successfully collected, ingested by Elastic Security, processed by the detection engine, and surfaced within the SOC monitoring environment.
 
 ---
 
 ## Results
 
-The privilege escalation simulation successfully generated Windows security telemetry and corresponding Elastic SIEM detections. Administrative privilege assignment activity was identified, correlated, and presented through custom detection content and SOC dashboards. This exercise demonstrated the platform's ability to detect and investigate privilege escalation techniques commonly associated with post-compromise attacker behavior.
+The privilege escalation simulation successfully generated Windows security telemetry and corresponding Elastic SIEM detections. The platform detected both local account creation and administrative group membership modification activity, providing visibility into attacker techniques commonly used to establish persistence and elevate privileges after initial compromise.
+
+This exercise validated multiple custom detection rules and demonstrated the SOC platform's ability to identify and investigate account manipulation events associated with post-compromise attacker behavior.
 
