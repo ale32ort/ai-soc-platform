@@ -2,23 +2,21 @@
 
 ## Objective
 
-Simulate a privilege escalation event by creating a new local user account and adding that account to the local Administrators group. The objective was to generate Windows security events that would be ingested by Elastic SIEM and detected by custom detection rules.
+Simulate a privilege escalation event by creating a new local user account and adding that account to the local Administrators group. The objective was to validate Elastic SIEM detections and demonstrate visibility into account manipulation and administrative privilege assignment activity.
 
 ## MITRE ATT&CK Mapping
 
-* T1078 – Valid Accounts
-* T1098 – Account Manipulation
-* T1068 – Privilege Escalation
+| Tactic               | Technique                             | ID    |
+| -------------------- | ------------------------------------- | ----- |
+| Persistence          | Valid Accounts                        | T1078 |
+| Privilege Escalation | Account Manipulation                  | T1098 |
+| Privilege Escalation | Exploitation for Privilege Escalation | T1068 |
 
-## Actions Performed
+---
 
-### 1. Baseline Collection
+## Activity Performed
 
-A baseline screenshot was captured before executing any privilege escalation activity to document the initial alert state within the environment.
-
-### 2. Account Creation and Privilege Escalation
-
-A new local user account was created and immediately added to the local Administrators group using Windows command-line utilities.
+A new local user account was created and immediately added to the local Administrators group using native Windows administration commands.
 
 Commands executed:
 
@@ -27,33 +25,55 @@ net user labuser Password123! /add
 net localgroup Administrators labuser /add
 ```
 
-### 3. Alert Generation
+This activity simulates a common attacker technique used to establish persistent administrative access on a compromised system.
 
-Elastic SIEM successfully detected the administrative group modification event and generated a high-severity alert associated with the privilege escalation activity.
-
-### 4. Alert Validation
-
-Alert details were reviewed to confirm the detection rule triggered correctly and correlated with the activity performed on the endpoint.
+---
 
 ## Evidence Collected
 
-### 00_Baseline_Before_PrivEsc.png
+### Baseline Alert State
 
-Baseline alert state before privilege escalation activity.
+![Baseline](00_Baseline_Before_PrivEsc.png)
 
-### 01_Account_Creation_And_Privilege_Escalation.png
+Baseline alert state prior to privilege escalation activity.
 
-Successful creation of a local user account and addition to the Administrators group.
+---
 
-### 02_User_Added_To_Admin_Group_Alert.png
+### Account Creation and Privilege Escalation
 
-Elastic SIEM alert generated from the administrative group membership modification event.
+![Account Creation and PrivEsc](01_Account_Creation_And_Privilege_Escalation.png)
 
-### 03_Alerts_After_PrivEsc.png
+Successful creation of a new local user account and elevation to the Administrators group.
 
-Alert dashboard showing the increased alert count following privilege escalation activity.
+---
+
+### User Added to Administrator Group Alert
+
+![Admin Group Alert](02_User_Added_To_Admin_Group_Alert.png)
+
+Elastic Security successfully detected the administrative group modification and generated a security alert.
+
+---
+
+### Alerts After Privilege Escalation
+
+![Alerts After PrivEsc](03_Alerts_After_PrivEsc.png)
+
+Updated alert dashboard showing detection activity following privilege escalation.
+
+---
+
+## Detection Validation
+
+The following detection rule was successfully validated:
+
+* User Added to Administrator Group
+
+The generated alert confirmed that Windows security events were successfully collected, ingested by Elastic Security, processed by the detection engine, and surfaced within the SOC monitoring environment.
+
+---
 
 ## Results
 
-The privilege escalation simulation successfully generated Windows security telemetry and corresponding Elastic SIEM detections. The activity demonstrated the ability of the monitoring environment to identify administrative privilege assignment events and provide visibility into potentially malicious account manipulation techniques.
+The privilege escalation simulation successfully generated Windows security telemetry and corresponding Elastic SIEM detections. Administrative privilege assignment activity was identified, correlated, and presented through custom detection content and SOC dashboards. This exercise demonstrated the platform's ability to detect and investigate privilege escalation techniques commonly associated with post-compromise attacker behavior.
 
