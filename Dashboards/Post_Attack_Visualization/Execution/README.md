@@ -42,35 +42,30 @@ Environment state prior to execution activity.
 
 ---
 
-### 01 – SOC Dashboard Before Execution
 
-SOC dashboard showing baseline alert volume before attack simulation.
 
-![SOC Dashboard Before Execution](01_SOC_Dashboard_Before_Execution.png)
 
----
-
-### 02 – Scheduled Task Creation Command
+### 01 – Scheduled Task Creation Command
 
 Execution activity performed on the monitored Windows endpoint.
 
-![Scheduled Task Creation](02_Scheduled_Task_Creation_Command.png)
+![Scheduled Task Creation](01_Scheduled_Task_Creation_Command.png)
 
 ---
 
-### 03 – Suspicious Scheduled Task Alert
+### 02 – Suspicious Scheduled Task Alert
 
 Elastic Security successfully detected the activity and generated an alert.
 
-![Suspicious Scheduled Task Alert](03_Suspicious_Scheduled_Task_Alert.png)
+![Suspicious Scheduled Task Alert](02_Suspicious_Scheduled_Task_Alert.png)
 
 ---
 
-### 04 – Alerts After Execution
+### 03 – Alerts After Execution
 
 SOC dashboard showing increased alert volume after execution activity was performed.
 
-![Alerts After Execution](04_Alerts_After_Execution.png)
+![Alerts After Execution](03_Alerts_After_Execution.png)
 
 ---
 
