@@ -7,7 +7,7 @@ Day 11 focused on validating the SOC environment through a multi-stage attack si
 The simulation covered Reconnaissance, Execution, Persistence, and Privilege Escalation techniques while generating alerts that were analyzed through Elastic SIEM dashboards and custom detection content.
  
 ---
-
+ 
 ## Activities Completed
 
 ### Reconnaissance Simulation
