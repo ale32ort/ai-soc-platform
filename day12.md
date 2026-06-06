@@ -1,5 +1,4 @@
-# Day 12 — AI SOC Triage Engine: Elastic Security Integration
-# + Telegram Alerting
+# Day 12 — AI SOC Triage Engine: Elastic Security Integration + Telegram Alerting
 
 ## Objective
 Integrate Elastic Security detection alerts directly into the AI
