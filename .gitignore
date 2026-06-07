@@ -19,3 +19,5 @@ splunk_retry_queue.jsonl
 # OS files
 .DS_Store
 Thumbs.db
+
+*_backup.py
