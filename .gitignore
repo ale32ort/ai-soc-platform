@@ -1,0 +1,21 @@
+# Environment variables
+.env
+
+# Python virtual environment
+venv/
+
+# Logs
+logs/
+*.log
+
+# Cache files
+__pycache__/
+*.pyc
+claude_cache.json
+
+# Runtime files
+splunk_retry_queue.jsonl
+
+# OS files
+.DS_Store
+Thumbs.db
