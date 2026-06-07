@@ -162,6 +162,26 @@ Detection rule fired → Claude analyzed → Telegram delivered.
 
 ---
 
+<<<<<<< HEAD
+=======
+### 8. Productionized AI Triage Engine
+
+Created a dedicated systemd service (ai-triage.service) to automatically start the AI triage engine during system boot.
+
+Benefits:
+- No manual execution required
+- Automatic restart after reboot
+- Continuous alert monitoring
+- Persistent SOC operation
+
+Verification:
+- Service enabled with systemctl enable ai-triage
+- Confirmed active (running) status
+- Successfully polling Elastic Security alerts after startup
+
+---
+
+>>>>>>> 396ef9d (Day 12 - AI triage engine integration and automated service deployment)
 ## Current Architecture
 
 ```
