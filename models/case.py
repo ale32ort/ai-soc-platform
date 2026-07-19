@@ -82,6 +82,31 @@ class InvestigationCase(BaseModel):
         )
         self.touch()
 
+    def add_timeline_event(
+        self,
+        *,
+        timestamp: datetime,
+        event_type: str,
+        description: str,
+        source: str,
+        data: dict[str, Any] | None = None,
+    ) -> None:
+        self.timeline.append(
+            TimelineEvent(
+                timestamp=timestamp,
+                event_type=event_type,
+                description=description,
+                source=source,
+                data=data or {},
+            )
+        )
+
+        self.timeline.sort(
+            key=lambda event: event.timestamp
+        )
+
+        self.touch()
+
     def add_task(self, name: str) -> None:
         self.tasks.append(
             InvestigationTask(name=name)

@@ -102,6 +102,16 @@ def collect_related_events(
 
     search_indices = indices or DEFAULT_INDICES
 
+    relevant_event_codes = [
+        "7045",
+        "4697",
+        "4688",
+        "1",
+        "3",
+        "4624",
+        "4625",
+    ]
+
     query = {
         "bool": {
             "filter": [
@@ -118,9 +128,88 @@ def collect_related_events(
                         }
                     }
                 },
+                {
+                    "terms": {
+                        "event.code": relevant_event_codes
+                    }
+                },
             ]
         }
     }
+
+    alert_event_data = (
+        case.original_alert
+        .get("winlog", {})
+        .get("event_data", {})
+    )
+
+    image_path = alert_event_data.get("ImagePath", "")
+    service_name = alert_event_data.get("ServiceName", "")
+
+    cleaned_image_path = image_path.strip().strip('"')
+    executable_name = (
+        cleaned_image_path.replace("\\", "/").split("/")[-1]
+        if cleaned_image_path
+        else ""
+    )
+
+    # When the alert provides an executable, perform a targeted search
+    # instead of collecting every process event on the host.
+    if executable_name:
+        query["bool"]["filter"].append(
+            {
+                "bool": {
+                    "should": [
+                        {
+                            "term": {
+                                "_id": case.alert_id
+                            }
+                        },
+                        {
+                            "wildcard": {
+                                "process.name": {
+                                    "value": f"*{executable_name}*",
+                                    "case_insensitive": True,
+                                }
+                            }
+                        },
+                        {
+                            "wildcard": {
+                                "process.executable": {
+                                    "value": f"*{executable_name}*",
+                                    "case_insensitive": True,
+                                }
+                            }
+                        },
+                        {
+                            "wildcard": {
+                                "process.command_line": {
+                                    "value": f"*{executable_name}*",
+                                    "case_insensitive": True,
+                                }
+                            }
+                        },
+                        {
+                            "wildcard": {
+                                "message": {
+                                    "value": f"*{executable_name}*",
+                                    "case_insensitive": True,
+                                }
+                            }
+                        },
+                        {
+                            "wildcard": {
+                                "winlog.event_data.ImagePath": {
+                                    "value": f"*{executable_name}*",
+                                    "case_insensitive": True,
+                                }
+                            }
+                        },
+                    ],
+                    "minimum_should_match": 1,
+                }
+            }
+        )
 
     response = es_client.search(
         index=",".join(search_indices),
@@ -136,6 +225,7 @@ def collect_related_events(
     )
 
     hits = response.get("hits", {}).get("hits", [])
+
     extracted_events = [
         _extract_event(hit)
         for hit in hits
