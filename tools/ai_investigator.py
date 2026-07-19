@@ -1,57 +1,113 @@
 from __future__ import annotations
 
 from models.case import InvestigationCase
+from models.investigation_result import InvestigationResult
+from tools.llm_provider import LLMProvider
 
 
 class AIInvestigator:
     """
-    Performs reasoning over an InvestigationCase.
-
-    Version 1 simply prepares the investigation context.
-    Later versions will call Claude/OpenAI.
+    Coordinates investigation context creation and AI analysis.
     """
 
-    def build_context(
-        self,
-        case: InvestigationCase,
-    ) -> str:
+    def __init__(self, provider: LLMProvider) -> None:
+        self.provider = provider
 
-        lines = []
+    def build_context(self, case: InvestigationCase) -> str:
+        lines = [
+            f"Alert Type: {case.alert_type}",
+            f"Alert ID: {case.alert_id}",
+            f"Host: {case.host}",
+            f"Severity: {case.severity}",
+            f"Risk Score: {case.risk_score}",
+            "",
+            "Timeline",
+            "--------",
+        ]
 
-        lines.append(
-            f"Alert Type: {case.alert_type}"
-        )
+        if case.timeline:
+            for event in case.timeline:
+                lines.append(
+                    f"- {event.timestamp} | "
+                    f"{event.event_type} | "
+                    f"{event.description}"
+                )
+        else:
+            lines.append("(none)")
 
-        lines.append(
-            f"Host: {case.host}"
-        )
+        lines.extend([
+            "",
+            "Evidence",
+            "--------",
+        ])
 
-        lines.append(
-            f"Severity: {case.severity}"
-        )
+        if case.evidence:
+            for evidence in case.evidence:
+                event_code = evidence.data.get(
+                    "event_code",
+                    "unknown",
+                )
 
-        lines.append(
-            f"Risk Score: {case.risk_score}"
-        )
+                process_name = evidence.data.get(
+                    "process_name",
+                    "unknown",
+                )
 
-        lines.append("")
+                service_name = evidence.data.get(
+                    "service_name",
+                    "unknown",
+                )
 
-        lines.append("Evidence")
+                image_path = evidence.data.get(
+                    "image_path",
+                    "unknown",
+                )
 
-        for evidence in case.evidence:
+                lines.append(
+                    f"- Timestamp: {evidence.timestamp}\n"
+                    f"  Source: {evidence.source}\n"
+                    f"  Description: {evidence.description}\n"
+                    f"  Event Code: {event_code}\n"
+                    f"  Process: {process_name}\n"
+                    f"  Service: {service_name}\n"
+                    f"  Image Path: {image_path}"
+                )
+        else:
+            lines.append("(none)")
 
-            event_code = evidence.data.get(
-                "event_code",
-                "unknown",
+        lines.extend([
+            "",
+            "Existing Findings",
+            "-----------------",
+        ])
+
+        if case.findings:
+            lines.extend(
+                f"- {finding}"
+                for finding in case.findings
             )
+        else:
+            lines.append("(none)")
 
-            process = evidence.data.get(
-                "process_name",
-                "unknown",
-            )
+        lines.extend([
+            "",
+            "Unanswered Questions",
+            "--------------------",
+        ])
 
-            lines.append(
-                f"- Event {event_code} | {process}"
+        if case.unanswered_questions:
+            lines.extend(
+                f"- {question}"
+                for question in case.unanswered_questions
             )
+        else:
+            lines.append("(none)")
 
         return "\n".join(lines)
+
+    def investigate(
+        self,
+        case: InvestigationCase,
+    ) -> InvestigationResult:
+        context = self.build_context(case)
+        return self.provider.investigate(context)
