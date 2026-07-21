@@ -28,6 +28,80 @@ The project demonstrates practical skills across Security Operations (SOC), Dete
 ![AI-Assisted SOC Platform Architecture](docs/images/e71303da-c1c2-46c3-8844-75ee0fe12176.png)
 
 
+# Investigation Pipeline
+
+```text
+Windows Endpoint / Network
+
+            │
+
+            ▼
+
+Elastic Security Detection
+
+            │
+
+            ▼
+
+Investigation Manager
+
+            │
+
+            ▼
+
+Alert Monitor
+
+            │
+
+            ▼
+
+Deduplicator
+
+            │
+
+            ▼
+
+Investigation Case
+
+            │
+
+            ▼
+
+Related Event Collection
+
+            │
+
+            ▼
+
+Timeline Builder
+
+            │
+
+            ▼
+
+AI Investigation Engine
+
+            │
+
+            ▼
+
+Structured Investigation Report
+
+            │
+
+            ▼
+
+Elasticsearch
+
+            │
+
+            ▼
+
+Kibana Dashboard
+```
+
+---
+
 ## 🚨 Elastic Security Detection
 
 The investigation workflow begins when Elastic Security detects suspicious activity. In this example, a custom detection rule identifies a Windows Service Creation event (Event ID 7045), a common persistence technique used by attackers.
@@ -160,80 +234,6 @@ The platform combines telemetry from multiple detection layers:
 - Windows Security Auditing
 - Winlogbeat
 - Elastic Security
-
----
-
-# Investigation Pipeline
-
-```text
-Windows Endpoint / Network
-
-            │
-
-            ▼
-
-Elastic Security Detection
-
-            │
-
-            ▼
-
-Investigation Manager
-
-            │
-
-            ▼
-
-Alert Monitor
-
-            │
-
-            ▼
-
-Deduplicator
-
-            │
-
-            ▼
-
-Investigation Case
-
-            │
-
-            ▼
-
-Related Event Collection
-
-            │
-
-            ▼
-
-Timeline Builder
-
-            │
-
-            ▼
-
-AI Investigation Engine
-
-            │
-
-            ▼
-
-Structured Investigation Report
-
-            │
-
-            ▼
-
-Elasticsearch
-
-            │
-
-            ▼
-
-Kibana Dashboard
-```
 
 ---
 
