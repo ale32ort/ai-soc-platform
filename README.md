@@ -134,8 +134,6 @@ Each investigation includes:
 
 ![Investigation Analysis](docs/images/investigation_analysis.png)
 
----
-
 ### Live Autonomous Investigation Execution
 
 The Investigation Manager continuously monitors Windows telemetry for qualifying security events. When a new alert is detected, it automatically collects evidence, performs an AI-powered investigation, stores the completed investigation in Elasticsearch, and advances its checkpoint to ensure each alert is processed only once.
