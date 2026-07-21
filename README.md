@@ -51,11 +51,11 @@ Each investigation includes:
 
 ### Investigation Metadata
 
-![Investigation Metadata](docs/images/investigation-metadata.png)
+![Investigation Metadata](docs/images/investigation_metadata.png)
 
 ### AI Analysis
 
-![Investigation Analysis](docs/images/investigation-analysis.png)
+![Investigation Analysis](docs/images/investigation_analysis.png)
 
 # Why This Project?
 
