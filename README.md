@@ -257,35 +257,17 @@ The platform combines telemetry from multiple detection layers:
 
 # Repository Structure
 
-```
-clients/
-```
+| Directory  | Purpose                                        |
+| ---------- | ---------------------------------------------- |
+| clients    | External integrations                          |
+| manager    | Investigation orchestration                    |
+| models     | Shared investigation models                    |
+| services   | Long-running background services               |
+| tools      | Evidence collection, persistence, AI providers |
+| dashboards | Kibana visualizations                          |
+| docs       | Images and documentation                       |
+| tests      | Unit and integration tests                     |
 
-External integrations including Elasticsearch.
-
-```
-models/
-```
-
-Shared investigation models.
-
-```
-services/
-```
-
-Long-running services including the autonomous Investigation Manager.
-
-```
-tools/
-```
-
-Evidence collection, AI investigation, persistence, timeline generation, and provider implementations.
-
-```
-tests/
-```
-
-Unit and integration tests.
 
 ---
 
