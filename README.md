@@ -128,6 +128,18 @@ The Investigation Manager continuously monitors Windows telemetry for qualifying
 
 ---
 
+## Design Principles
+
+- Modular architecture
+- Stateless services where possible
+- Idempotent processing
+- Persistent checkpoints
+- Separation of orchestration and analysis
+- Transparent AI reasoning
+- Human analyst remains the decision maker
+
+---
+
 # Why This Project?
 
 Modern Security Operations Centers generate thousands of security alerts every day.
