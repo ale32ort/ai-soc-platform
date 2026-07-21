@@ -27,6 +27,14 @@ The project demonstrates practical skills across Security Operations (SOC), Dete
 
 ![AI-Assisted SOC Platform Architecture](docs/images/e71303da-c1c2-46c3-8844-75ee0fe12176.png)
 
+--
+
+## 🚨 Elastic Security Detection
+
+The investigation workflow begins when Elastic Security detects suspicious activity. In this example, a custom detection rule identifies a Windows Service Creation event (Event ID 7045), a common persistence technique used by attackers.
+
+![Elastic Security Alert](docs/images/Elastic_Security_Detection.png)
+
 # Why This Project?
 
 Modern Security Operations Centers generate thousands of security alerts every day.
