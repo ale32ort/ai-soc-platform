@@ -73,7 +73,7 @@ Structured Investigation Report
 Elasticsearch
         │
         ▼
-Kibana
+    Kibana
 ```
 
 ---
