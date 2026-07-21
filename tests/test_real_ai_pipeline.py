@@ -1,5 +1,5 @@
 from __future__ import annotations
-
+from tools.investigation_writer import save_investigation_result
 from clients.elastic_client import es
 from models.case import InvestigationCase
 from tools.ai_investigator import AIInvestigator
@@ -71,10 +71,20 @@ def main() -> None:
 
     result = investigator.investigate(case)
 
+    save_response = save_investigation_result(
+    case,
+    result,
+    es,
+)
+
     print("\n========== Real AI Investigation ==========")
     print(f"Host: {case.host}")
     print(f"Evidence collected: {len(case.evidence)}")
     print(f"Timeline events: {len(case.timeline)}")
+    print(f"Saved index: {save_response.get('_index')}")
+    print(f"Saved document ID: {save_response.get('_id')}")
+    print(f"Save result: {save_response.get('result')}")
+    print()
     print()
     print(result)
 
