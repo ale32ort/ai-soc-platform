@@ -1,4 +1,9 @@
-# 🛡️ AI-Assisted SOC Platform
+# 🛡️ Autonomous AI Security Operations Center
+
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![Elastic Stack](https://img.shields.io/badge/Elastic-Stack-005571)
+![Status](https://img.shields.io/badge/Status-Active-success)
+![AI](https://img.shields.io/badge/LLM-Claude-purple)
 
 > An autonomous security operations platform built on the Elastic Stack that continuously detects, investigates, and documents security alerts using AI.
 
@@ -23,6 +28,21 @@ The project demonstrates practical skills across Security Operations (SOC), Dete
 
 ---
 
+## Features
+
+- Autonomous investigation orchestration
+- AI-powered investigation reports
+- Elastic Security integration
+- Persistent checkpoint recovery
+- Timeline reconstruction
+- MITRE ATT&CK mapping
+- Elasticsearch persistence
+- Modular LLM architecture
+- Multi-sensor telemetry
+- Security automation
+
+---
+
 ## Architecture
 
 ![AI-Assisted SOC Platform Architecture](docs/images/e71303da-c1c2-46c3-8844-75ee0fe12176.png)
@@ -32,73 +52,28 @@ The project demonstrates practical skills across Security Operations (SOC), Dete
 # Investigation Pipeline
 
 ```text
-Windows Endpoint / Network
-
-            │
-
-            ▼
-
-Elastic Security Detection
-
-            │
-
-            ▼
-
+Windows Endpoint
+        │
+        ▼
+Elastic Security
+        │
+        ▼
 Investigation Manager
-
-            │
-
-            ▼
-
-Alert Monitor
-
-            │
-
-            ▼
-
-Deduplicator
-
-            │
-
-            ▼
-
-Investigation Case
-
-            │
-
-            ▼
-
-Related Event Collection
-
-            │
-
-            ▼
-
-Timeline Builder
-
-            │
-
-            ▼
-
+        │
+        ▼
+Evidence Collection
+        │
+        ▼
 AI Investigation Engine
-
-            │
-
-            ▼
-
+        │
+        ▼
 Structured Investigation Report
-
-            │
-
-            ▼
-
+        │
+        ▼
 Elasticsearch
-
-            │
-
-            ▼
-
-Kibana Dashboard
+        │
+        ▼
+Kibana
 ```
 
 ---
