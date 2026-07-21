@@ -43,6 +43,17 @@ The project demonstrates practical skills across Security Operations (SOC), Dete
 
 ---
 
+## Project Metrics
+
+- 193 Git commits
+- 9 Python packages/modules
+- AI-powered investigation engine
+- Persistent checkpoint processing
+- Multi-sensor telemetry collection
+- End-to-end investigation automation
+
+---
+
 ## Architecture
 
 ![AI-Assisted SOC Platform Architecture](docs/images/e71303da-c1c2-46c3-8844-75ee0fe12176.png)
