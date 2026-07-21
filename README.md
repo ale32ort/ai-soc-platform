@@ -27,6 +27,7 @@ The project demonstrates practical skills across Security Operations (SOC), Dete
 
 ![AI-Assisted SOC Platform Architecture](docs/images/e71303da-c1c2-46c3-8844-75ee0fe12176.png)
 
+----
 
 # Investigation Pipeline
 
@@ -108,6 +109,8 @@ The investigation workflow begins when Elastic Security detects suspicious activ
 
 ![Elastic Security Alert](docs/images/Elastic_Security_Detection.png)
 
+---
+
 # 🤖 AI Investigation Report
 
 Every eligible detection is automatically investigated by the AI Investigation Engine.
@@ -131,9 +134,11 @@ Each investigation includes:
 
 ![Investigation Analysis](docs/images/investigation_analysis.png)
 
-### Autonomous Investigation Manager
+---
 
-The Investigation Manager continuously monitors Windows telemetry, launches AI-powered investigations for qualifying alerts, stores the completed investigation in Elasticsearch, and advances its checkpoint to avoid duplicate processing.
+### Live Autonomous Investigation Execution
+
+The Investigation Manager continuously monitors Windows telemetry for qualifying security events. When a new alert is detected, it automatically collects evidence, performs an AI-powered investigation, stores the completed investigation in Elasticsearch, and advances its checkpoint to ensure each alert is processed only once.
 
 ![Investigation Manager](docs/images/investigation_manager.png)
 
