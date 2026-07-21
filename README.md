@@ -142,6 +142,8 @@ The Investigation Manager continuously monitors Windows telemetry for qualifying
 
 ![Investigation Manager](docs/images/investigation_manager.png)
 
+---
+
 # Why This Project?
 
 Modern Security Operations Centers generate thousands of security alerts every day.
