@@ -354,6 +354,14 @@ Building this platform reinforced several important software engineering and sec
 
 ---
 
+## Final Notes
+
+This project was built to explore how AI can augment, rather than replace, security analysts. By combining Elastic Security, structured evidence collection, and AI-assisted investigations, the platform demonstrates a practical approach to reducing repetitive investigative work while maintaining analyst oversight.
+
+The project continues to evolve with future work focused on multi-alert correlation, threat intelligence enrichment, and increasingly autonomous investigation workflows.
+
+---
+
 # License
 
 This project is intended for educational, research, and portfolio purposes.
