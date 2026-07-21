@@ -34,6 +34,29 @@ The investigation workflow begins when Elastic Security detects suspicious activ
 
 ![Elastic Security Alert](docs/images/Elastic_Security_Detection.png)
 
+# 🤖 AI Investigation Report
+
+Every eligible detection is automatically investigated by the AI Investigation Engine.
+
+Each investigation includes:
+
+- Executive Summary
+- AI Reasoning
+- MITRE ATT&CK Mapping
+- Risk Assessment
+- Evidence Count
+- Investigation Status
+- Analyst Recommendations
+- Final Verdict
+
+### Investigation Metadata
+
+![Investigation Metadata](docs/images/investigation-metadata.png)
+
+### AI Analysis
+
+![Investigation Analysis](docs/images/investigation-analysis.png)
+
 # Why This Project?
 
 Modern Security Operations Centers generate thousands of security alerts every day.
