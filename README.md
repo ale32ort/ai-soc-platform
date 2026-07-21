@@ -25,7 +25,7 @@ The project demonstrates practical skills across Security Operations (SOC), Dete
 
 ## Architecture
 
-![AI-Assisted SOC Platform Architecture](docs/images/1554d832-e0a1-4120-9c4a-e87a524e3204.png)
+![AI-Assisted SOC Platform Architecture](docs/images/e71303da-c1c2-46c3-8844-75ee0fe12176.png)
 
 # Why This Project?
 
