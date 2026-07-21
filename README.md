@@ -57,6 +57,12 @@ Each investigation includes:
 
 ![Investigation Analysis](docs/images/investigation_analysis.png)
 
+### Autonomous Investigation Manager
+
+The Investigation Manager continuously monitors Windows telemetry, launches AI-powered investigations for qualifying alerts, stores the completed investigation in Elasticsearch, and advances its checkpoint to avoid duplicate processing.
+
+![Investigation Manager](docs/images/investigation_manager.png)
+
 # Why This Project?
 
 Modern Security Operations Centers generate thousands of security alerts every day.
