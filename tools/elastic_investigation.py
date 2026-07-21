@@ -1,0 +1,311 @@
+from __future__ import annotations
+
+from datetime import datetime, timedelta, timezone
+from typing import Any
+
+from models.case import InvestigationCase
+
+
+DEFAULT_INDICES = [
+    "winlogbeat-*",
+    "filebeat-*",
+]
+
+
+def _parse_timestamp(value: str | None) -> datetime:
+    """Convert an Elastic ISO timestamp into a timezone-aware datetime."""
+
+    if not value:
+        return datetime.now(timezone.utc)
+
+    try:
+        parsed = datetime.fromisoformat(
+            value.replace("Z", "+00:00")
+        )
+    except ValueError as exc:
+        raise ValueError(
+            f"Invalid alert timestamp: {value}"
+        ) from exc
+
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+
+    return parsed
+
+
+def _extract_event(hit: dict[str, Any]) -> dict[str, Any]:
+    """Convert a raw Elasticsearch hit into useful investigation evidence."""
+
+    source = hit.get("_source", {})
+
+    event_data = (
+        source.get("winlog", {})
+        .get("event_data", {})
+    )
+
+    process = source.get("process", {})
+    parent = process.get("parent", {})
+    file_info = source.get("file", {})
+
+    return {
+        "document_id": hit.get("_id"),
+        "source_index": hit.get("_index"),
+
+        "timestamp": source.get("@timestamp"),
+        "host": source.get("host", {}).get("name"),
+
+        "event_code": source.get("event", {}).get("code"),
+        "event_action": source.get("event", {}).get("action"),
+        "event_module": source.get("event", {}).get("module"),
+
+        "user": source.get("user", {}).get("name"),
+
+        "process_name": process.get("name"),
+        "process_executable": process.get("executable"),
+        "command_line": process.get("command_line"),
+        "process_id": process.get("pid"),
+
+        "parent_process_name": parent.get("name"),
+        "parent_process_executable": parent.get("executable"),
+        "parent_process_id": parent.get("pid"),
+
+        "service_name": (
+            event_data.get("ServiceName")
+            or event_data.get("Service Name")
+        ),
+        "image_path": (
+            event_data.get("ImagePath")
+            or event_data.get("Image Path")
+        ),
+        "service_type": (
+            event_data.get("ServiceType")
+            or event_data.get("Service Type")
+        ),
+        "start_type": (
+            event_data.get("StartType")
+            or event_data.get("Start Type")
+        ),
+        "account_name": (
+            event_data.get("AccountName")
+            or event_data.get("Account Name")
+        ),
+
+        "source_ip": source.get("source", {}).get("ip"),
+        "source_port": source.get("source", {}).get("port"),
+
+        "destination_ip": source.get(
+            "destination",
+            {},
+        ).get("ip"),
+        "destination_port": source.get(
+            "destination",
+            {},
+        ).get("port"),
+
+        "file_path": file_info.get("path"),
+        "file_name": file_info.get("name"),
+        "file_hash": file_info.get("hash"),
+
+        "message": source.get("message"),
+        "winlog_event_data": event_data,
+    }
+
+def collect_related_events(
+    case: InvestigationCase,
+    es_client: Any,
+    *,
+    indices: list[str] | None = None,
+    minutes_before: int = 15,
+    minutes_after: int = 15,
+    max_events: int = 100,
+) -> InvestigationCase:
+    """
+    Query Elasticsearch for events surrounding the original alert.
+
+    The function updates the same InvestigationCase and returns it.
+    """
+
+    if not case.host or case.host == "unknown":
+        raise ValueError(
+            "Cannot collect related events without a valid host."
+        )
+
+    alert_timestamp = _parse_timestamp(
+        case.original_alert.get("@timestamp")
+    )
+
+    start_time = alert_timestamp - timedelta(
+        minutes=minutes_before
+    )
+    end_time = alert_timestamp + timedelta(
+        minutes=minutes_after
+    )
+
+    search_indices = indices or DEFAULT_INDICES
+
+    relevant_event_codes = [
+        "7045",
+        "4697",
+        "4688",
+        "1",
+        "3",
+        "4624",
+        "4625",
+    ]
+
+    query = {
+        "bool": {
+            "filter": [
+                {
+                    "term": {
+                        "host.name": case.host
+                    }
+                },
+                {
+                    "range": {
+                        "@timestamp": {
+                            "gte": start_time.isoformat(),
+                            "lte": end_time.isoformat(),
+                        }
+                    }
+                },
+                {
+                    "terms": {
+                        "event.code": relevant_event_codes
+                    }
+                },
+            ]
+        }
+    }
+
+    alert_event_data = (
+        case.original_alert
+        .get("winlog", {})
+        .get("event_data", {})
+    )
+
+    image_path = alert_event_data.get("ImagePath", "")
+    service_name = alert_event_data.get("ServiceName", "")
+
+    cleaned_image_path = image_path.strip().strip('"')
+    executable_name = (
+        cleaned_image_path.replace("\\", "/").split("/")[-1]
+        if cleaned_image_path
+        else ""
+    )
+
+    # When the alert provides an executable, perform a targeted search
+    # instead of collecting every process event on the host.
+    if executable_name:
+        query["bool"]["filter"].append(
+            {
+                "bool": {
+                    "should": [
+                        {
+                            "term": {
+                                "_id": case.alert_id
+                            }
+                        },
+                        {
+                            "wildcard": {
+                                "process.name": {
+                                    "value": f"*{executable_name}*",
+                                    "case_insensitive": True,
+                                }
+                            }
+                        },
+                        {
+                            "wildcard": {
+                                "process.executable": {
+                                    "value": f"*{executable_name}*",
+                                    "case_insensitive": True,
+                                }
+                            }
+                        },
+                        {
+                            "wildcard": {
+                                "process.command_line": {
+                                    "value": f"*{executable_name}*",
+                                    "case_insensitive": True,
+                                }
+                            }
+                        },
+                        {
+                            "wildcard": {
+                                "message": {
+                                    "value": f"*{executable_name}*",
+                                    "case_insensitive": True,
+                                }
+                            }
+                        },
+                        {
+                            "wildcard": {
+                                "winlog.event_data.ImagePath": {
+                                    "value": f"*{executable_name}*",
+                                    "case_insensitive": True,
+                                }
+                            }
+                        },
+                    ],
+                    "minimum_should_match": 1,
+                }
+            }
+        )
+
+    response = es_client.search(
+        index=",".join(search_indices),
+        query=query,
+        size=max_events,
+        sort=[
+            {
+                "@timestamp": {
+                    "order": "asc"
+                }
+            }
+        ],
+    )
+
+    hits = response.get("hits", {}).get("hits", [])
+
+    extracted_events = [
+        _extract_event(hit)
+        for hit in hits
+    ]
+
+    for event in extracted_events:
+        event_timestamp = None
+
+        if event.get("timestamp"):
+            event_timestamp = _parse_timestamp(
+                event["timestamp"]
+            )
+
+        case.add_evidence(
+            source=event.get(
+                "source_index",
+                "elasticsearch",
+            ),
+            description=(
+                f"Related event "
+                f"{event.get('event_code') or 'unknown'} "
+                f"found on host {case.host}."
+            ),
+            timestamp=event_timestamp,
+            data=event,
+        )
+
+    case.complete_task(
+        name="collect_related_events",
+        result={
+            "events_found": len(extracted_events),
+            "indices_searched": search_indices,
+            "host": case.host,
+            "window_start": start_time.isoformat(),
+            "window_end": end_time.isoformat(),
+        },
+    )
+
+    case.status = "investigating"
+    case.touch()
+
+    return case

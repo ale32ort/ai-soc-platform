@@ -21,3 +21,9 @@ splunk_retry_queue.jsonl
 Thumbs.db
 
 *_backup.py
+# Investigation agent
+.env
+.venv/
+__pycache__/
+*.pyc
+investigations/*.json
