@@ -38,21 +38,61 @@ def _extract_event(hit: dict[str, Any]) -> dict[str, Any]:
 
     source = hit.get("_source", {})
 
+    event_data = (
+        source.get("winlog", {})
+        .get("event_data", {})
+    )
+
+    process = source.get("process", {})
+    parent = process.get("parent", {})
+    file_info = source.get("file", {})
+
     return {
         "document_id": hit.get("_id"),
         "source_index": hit.get("_index"),
+
         "timestamp": source.get("@timestamp"),
         "host": source.get("host", {}).get("name"),
+
         "event_code": source.get("event", {}).get("code"),
         "event_action": source.get("event", {}).get("action"),
         "event_module": source.get("event", {}).get("module"),
+
         "user": source.get("user", {}).get("name"),
-        "process_name": source.get("process", {}).get("name"),
-        "command_line": source.get(
-            "process",
-            {},
-        ).get("command_line"),
+
+        "process_name": process.get("name"),
+        "process_executable": process.get("executable"),
+        "command_line": process.get("command_line"),
+        "process_id": process.get("pid"),
+
+        "parent_process_name": parent.get("name"),
+        "parent_process_executable": parent.get("executable"),
+        "parent_process_id": parent.get("pid"),
+
+        "service_name": (
+            event_data.get("ServiceName")
+            or event_data.get("Service Name")
+        ),
+        "image_path": (
+            event_data.get("ImagePath")
+            or event_data.get("Image Path")
+        ),
+        "service_type": (
+            event_data.get("ServiceType")
+            or event_data.get("Service Type")
+        ),
+        "start_type": (
+            event_data.get("StartType")
+            or event_data.get("Start Type")
+        ),
+        "account_name": (
+            event_data.get("AccountName")
+            or event_data.get("Account Name")
+        ),
+
         "source_ip": source.get("source", {}).get("ip"),
+        "source_port": source.get("source", {}).get("port"),
+
         "destination_ip": source.get(
             "destination",
             {},
@@ -61,13 +101,14 @@ def _extract_event(hit: dict[str, Any]) -> dict[str, Any]:
             "destination",
             {},
         ).get("port"),
-        "message": source.get("message"),
-        "winlog_event_data": source.get(
-            "winlog",
-            {},
-        ).get("event_data", {}),
-    }
 
+        "file_path": file_info.get("path"),
+        "file_name": file_info.get("name"),
+        "file_hash": file_info.get("hash"),
+
+        "message": source.get("message"),
+        "winlog_event_data": event_data,
+    }
 
 def collect_related_events(
     case: InvestigationCase,
