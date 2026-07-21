@@ -23,6 +23,10 @@ The project demonstrates practical skills across Security Operations (SOC), Dete
 
 ---
 
+## Architecture
+
+![AI-Assisted SOC Platform Architecture](docs/images/ai-soc-architecture.png)
+
 # Why This Project?
 
 Modern Security Operations Centers generate thousands of security alerts every day.
